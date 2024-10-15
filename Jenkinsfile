@@ -1,39 +1,20 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-python'
-            }
-      }
-    triggers {
-        pollSCM '* * * * *'
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
-                sh '''
-                cd myapp
-                pip install -r requirements.txt
-                '''
+                echo 'Building...'
             }
         }
         stage('Test') {
             steps {
-                echo "Testing.."
-                sh '''
-                cd myapp
-                python3 hello.py
-                python3 hello.py --name=Brad
-                '''
+                echo 'Testing...'
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
-                echo 'Deliver....'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
+                echo 'Deploying...'
             }
-        }
-    }
+        }
+    }
 }
